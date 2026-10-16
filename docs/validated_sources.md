@@ -1,0 +1,11 @@
+## In this document are listed the validated capabilities of the databrick free version
+
+| Validación | Resultado | Implicación |
+|---|---|---|
+| Salida a internet desde notebooks serverless | ✅ OK (2026-10-15): HTTP 200 a api.steampowered.com, store.steampowered.com, steamspy.com, api.github.com, pypi.org | La ingesta puede correr desde Databricks. La doc oficial dice que la salida se limita a dominios de confianza: la lista puede cambiar, así que el extractor debe fallar de forma explícita. Decisión final en el ADR de ingesta |
+| Crear catálogos propios | ✅ OK: `steam_dev` creado (`SHOW CATALOGS`: samples, steam_dev, system, workspace) | Se mantiene el diseño `steam_dev` / `steam_prod` del charter |
+| Crear Volumes | ✅ Creado `steam_dev.landing.raw`; escritura OK (`dbutils.fs.put`, 26 bytes). La lectura falló con `UNABLE_TO_INFER_SCHEMA` porque Spark ignora archivos que empiezan con `_` o `.` (convención para metadatos: `_delta_log`, `_SUCCESS`, `.crc`). Diagnosticado por el alumno el 2026-10-16 | Landing en Volume viable. Convención: ningún archivo de datos empieza con `_` o `.` (detalle de rutas en Módulo 4) |
+| Tokens personales para la CLI | ✅ Disponibles (2026-10-16): opción para crear PATs habilitada; aún no se genera ninguno | CLI y Asset Bundles viables desde la máquina local. En CI no se usará el PAT personal |
+| Service principals | ✅ Disponibles (2026-10-16): se pueden crear desde la UI del workspace | Mitiga el riesgo del charter: CI/CD (Módulo 10) puede autenticarse con un service principal. Por verificar en el Módulo 10: generación de OAuth secrets (M2M) sin account console |
+| System tables disponibles | ✅ `system.billing.usage` legible (registros de Genie del 2026-10-15). Schemas en `system`: access, ai, ai_gateway, billing, compute, information_schema, lakeflow, mlflow, query, serving, sharing, storage | Monitoreo de costo viable (Módulo 11). Los registros de uso llegan con desfase de horas |
+| Límite de cómputo observado en la práctica | ⏳ Aún sin observar | Runtime observado: Spark 4.2.0 en serverless; `cache()`/`persist()` y Spark UI no disponibles en serverless (doc oficial) |

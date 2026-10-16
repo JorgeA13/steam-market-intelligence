@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.coverage
+
+# Secretos y entorno local — NUNCA al repo
+.env
+.env.*
+*.pem
+.databrickscfg
+
+# Databricks
+.databricks/
+.ipynb_checkpoints/
+
+# SO / IDE
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
