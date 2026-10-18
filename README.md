@@ -1,8 +1,8 @@
 # Steam Market Intelligence Lakehouse
 
-A production-grade lakehouse built on Databricks that integrates public data from the Steam ecosystem (catalog, pricing history, concurrent players, and reviews) — and later Twitch audience data — to answer **pricing analytics** and **product analytics** questions in the video game industry.
+A lakehouse built with production-grade practices on Databricks. It integrates public data from the Steam ecosystem (catalog, pricing history, concurrent players, and reviews) — and later Twitch audience data — to answer **pricing analytics** and **product analytics** questions in the video game industry.
 
-This repository is both a hands-on learning project (following a structured Data Engineer curriculum) and a professional portfolio piece. Each module of the curriculum adds a real component to the platform.
+This repository is both a hands-on learning project (following a structured Data Engineer curriculum) and a professional portfolio piece. Each phase of the curriculum adds a real component to the platform.
 
 ## Business Context
 
@@ -41,30 +41,6 @@ Sources → Extractors → Landing (Volume) → Bronze → Silver → Gold → C
 **Governance:** Unity Catalog (grants, lineage)  
 **Observability:** System tables
 
-### High-level diagram
-
-```
-Steam API / Store / Reviews / Twitch
-          │
-          ▼
-   Python Extractors
-          │
-          ▼
-     Landing Volume
-          │
-          ▼
-  Bronze (Auto Loader)
-          │
-          ▼
- Silver (SCD2 + Quality)
-          │
-          ▼
-   Gold (Dimensional)
-          │
-          ▼
- Databricks SQL Dashboards
-```
-
 ## Tech Stack
 
 - **Platform:** Databricks (Free Edition) + Unity Catalog
@@ -76,7 +52,9 @@ Steam API / Store / Reviews / Twitch
 - **Quality & Observability:** Custom quality rules + system tables
 - **Language:** Python, SQL
 
-## Project Structure
+## Target Structure
+
+Directories are created as each phase is implemented.
 
 ```
 steam-market-intelligence/
@@ -89,38 +67,33 @@ steam-market-intelligence/
 │   ├── architecture.md
 │   ├── data_dictionary.md
 │   ├── runbook.md
-│   └── adr/
+│   └── adr/               # ADR log will be published in docs/adr/
 ├── databricks.yml
 └── README.md
 ```
 
 ## Current Status
 
-| Area                    | Status          | Notes                                      |
-|-------------------------|-----------------|--------------------------------------------|
-| Project setup           | In progress     | Repo created, Git folders connected        |
-| Free Edition validations| Completed       | Catalogs, Volumes, PATs, system tables OK  |
-| Data sources            | Validated       | Steam APIs reachable from serverless       |
-| Extractors              | Not started     | Planned for Module 4                       |
-| Bronze / Silver / Gold  | Not started     | —                                          |
-| CI/CD                   | Not started     | Planned for Modules 9–10                   |
+| Area                    | Status                                      | Notes                                      |
+|-------------------------|---------------------------------------------|--------------------------------------------|
+| Project setup           | In progress                                 | Repo created, Git folders connected        |
+| Free Edition validations| Completed                                   | Catalogs, Volumes, PATs, system tables OK  |
+| Data sources            | Reachability confirmed; endpoint validation in progress | Domain connectivity tested; full API validation pending |
+| Extractors              | Not started                                 | Planned for Phase 2                        |
+| Bronze / Silver / Gold  | Not started                                 | —                                          |
+| CI/CD                   | Not started                                 | Planned for Phase 4                        |
 
-> This project is under active development as part of a structured learning curriculum. See `docs/` and the ADR log for design decisions.
+> This project is under active development as part of a structured learning curriculum. See `docs/` for design decisions. The ADR log will be published in `docs/adr/`.
 
 ## Getting Started
 
-*(To be completed as the project matures)*
-
-1. Clone the repository
-2. Configure Databricks authentication (PAT or service principal)
-3. Deploy with Asset Bundles: `databricks bundle deploy --target dev`
-4. ...
+Coming soon: deployment instructions will be added with Asset Bundles (Phase 4).
 
 ## Key Design Decisions
 
-Important technical decisions are documented as Architecture Decision Records in `docs/adr/`.
+Important technical decisions will be documented as Architecture Decision Records in `docs/adr/` (to be created in a later phase).
 
-Examples:
+Examples of decisions already made:
 - **ADR-001:** Steam ecosystem as the data domain (covers master data + SCD2, time series, semi-structured data, and multi-source integration).
 - **ADR-002:** Entire repository in English (code, commits, documentation).
 
@@ -136,7 +109,7 @@ Examples:
 
 ## Contributing / Learning Notes
 
-This repository is primarily a personal learning and portfolio project. Feedback and discussions about design decisions are welcome via issues or discussions.
+This repository is primarily a personal learning and portfolio project. Feedback and discussions about design decisions are welcome via issues.
 
 ## License
 
