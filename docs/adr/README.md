@@ -11,6 +11,7 @@ One decision per file, numbered in order (`NNNN-short-title.md`). Records are ne
 | [0001](0001-project-domain-steam.md) | Project data domain: Steam ecosystem | Superseded by ADR-0003 |
 | [0002](0002-repository-language.md) | Repository language | Accepted |
 | [0003](0003-domain-change-vehicle-energy-mx.md) | Domain change: vehicles and energy in Mexico | Accepted |
+| [0004](0004-repository-zones-and-code-promotion.md) | Repository zones by responsibility and code promotion | Accepted |
 
 ## Template
 
